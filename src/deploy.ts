@@ -28,12 +28,12 @@ const MIGRATION_STEPS: MigrationStep[] = [
   DEPLOY_NFT_DESCRIPTOR_LIBRARY_V1_3_0,
   DEPLOY_NFT_POSITION_DESCRIPTOR_V1_3_0,
   DEPLOY_TRANSPARENT_PROXY_DESCRIPTOR,
-  DEPLOY_NONFUNGIBLE_POSITION_MANAGER,
-  DEPLOY_V3_MIGRATOR,
+  DEPLOY_NONFUNGIBLE_POSITION_MANAGER,//secondbatch
+  DEPLOY_V3_MIGRATOR,//secondbatch
   TRANSFER_V3_CORE_FACTORY_OWNER,
-  DEPLOY_V3_STAKER,
+  DEPLOY_V3_STAKER,//secondbatch
   DEPLOY_QUOTER_V2,
-  DEPLOY_V3_SWAP_ROUTER_02,
+  DEPLOY_V3_SWAP_ROUTER_02,//secondbatch
   TRANSFER_PROXY_ADMIN,
 ]
 
@@ -56,8 +56,11 @@ export default function deploy({
   initialState: MigrationState
   onStateChange: (newState: MigrationState) => Promise<void>
 }): AsyncGenerator<StepOutput[], void, void> {
-  const gasPrice =
-    typeof numberGasPrice === 'number' ? BigNumber.from(numberGasPrice).mul(BigNumber.from(10).pow(9)) : undefined // convert to wei
+  
+  const gasPrice = BigNumber.from(140000000000) //typeof numberGasPrice === 'number' ? BigNumber.from(7000000).mul(BigNumber.from(10).pow(9)) : undefined // convert to wei
+  console.log(numberGasPrice) 
+  // const gasPrice =
+    // typeof numberGasPrice === 'number' ? BigNumber.from(numberGasPrice).mul(BigNumber.from(10).pow(9)) : undefined // convert to wei
 
   return migrate({
     steps: MIGRATION_STEPS,
